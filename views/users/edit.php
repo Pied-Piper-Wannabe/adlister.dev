@@ -30,13 +30,16 @@
                 <form method="POST" action="" data-validation data-required-message="This field is required">
 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" value="<?= $user->name; ?>" data-required>
+                        <label>Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" value="<?= $name; ?>" data-required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?= $user->email; ?>" data-required>
+                        <label>Email:</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?= $email; ?>" data-required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?= $user->username; ?>" data-required>
+                        <label>Username:</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?= $username; ?>" data-required>
                     </div>
                     <button type="submit" class="btn btn-primary">Update Account</button>
 
