@@ -86,6 +86,12 @@ function pageController()
 
         case '/edit-user' :
             $mainView = '../views/users/edit.php';
+            $user = new User;
+            $userInfo = $user::findByUsernameOrEmail($_SESSION['LOGGED_IN_USER']);
+            $data['name'] = $userInfo->name;
+            $data['username'] = $userInfo->username;
+            $data['email'] = $userInfo->email;
+
             break;
 
         case '/login' :
@@ -95,11 +101,6 @@ function pageController()
             if(Input::has("email_user")) {
                 $attempt = $user::attempt(Input::get("email_user"), Input::get("password"));
 
-                if($attempt === true) {
-                    echo("YAY");
-                }else{
-                    echo("NOOO");
-                }
                 if($user::check()){
                     header("Location: http://adlister.dev"); 
                     die();
