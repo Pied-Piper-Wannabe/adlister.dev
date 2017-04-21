@@ -13,9 +13,22 @@
         <!-- Only one row. -->
     </div>
     <!-- Create Buttons Below -->
-    <!-- <div class="row">
-        <div class="col-md-6 offset-md-3 col-sm offset-sm-0">
-            
+    <div class="row">
+        <div class="col centerText">
+            <?PHP if ($page > 1) : ?>
+                <a class="btn btn-outline-success" href="http://adlister.dev/items?page=<?= $page - 1 ?>" role="button">Previous</a>
+            <?PHP else : ?>
+                <a class="btn btn-outline-success disabled" href="http://adlister.dev/items?page=<?= $page - 1 ?>" role="button">Previous</a>
+            <?PHP endif; ?>
+
+            <?PHP if ($page < $pages) : ?>
+                <a class="btn btn-outline-success" href="http://adlister.dev/items?page=<?= $page + 1 ?>" role="button">Next</a>
+            <?PHP else : ?>
+                <a class="btn btn-outline-success disabled" href="http://adlister.dev/items?page=<?= $page + 1 ?>" role="button">Next</a>
+            <?PHP endif; ?>
+            <!-- Return current page and total number of results -->
+            <p>Page: <?= $page ?> of <?= $pages ?></p>
+            <p>Total Results: <?= $totalResults ?></p>
         </div>
-    </div> -->
+    </div>
 </div>
