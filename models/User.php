@@ -52,7 +52,7 @@ class User extends Model {
             if (($username === $userInfo->username || $username === $userInfo->email) && (password_verify($password, $userInfo->password))) { 
                 $log = new Log();
                 $log->info("User $username logged in.");
-                $_SESSION['LOGGED_IN_USER'] = "guest";
+                $_SESSION['LOGGED_IN_USER'] = $userInfo->username;
             return true;
             }else{
                 $log = new Log();
