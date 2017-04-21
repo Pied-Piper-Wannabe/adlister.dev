@@ -4,15 +4,10 @@
 ?>
 
 <div class="container">
-
     <section id="login">
-
         <div class="row">
-
             <h1 class="section-title">Edit Account</h1>
-
             <div class="col-md-6 col-md-offset-3">
-
                 <p>Please fill out the information below so we can update your account.</p>
                 <?php if (isset($_SESSION['ERROR_MESSAGE'])) : ?>
                     <div class="alert alert-danger">
@@ -26,9 +21,7 @@
                     </div>
                     <?php unset($_SESSION['SUCCESS_MESSAGE']); ?>
                 <?php endif; ?>
-
                 <form method="POST" action="" data-validation data-required-message="This field is required">
-
                     <div class="form-group">
                         <label>Name:</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" value="<?= $name; ?>" data-required>
@@ -41,14 +34,9 @@
                         <label>Username:</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?= $username; ?>" data-required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update Account</button>
-
+                    <button type="submit" class="btn btn-success">Update Account</button>
                 </form>
-
             </div>
-
         </div>
-
     </section>
-
 </div>

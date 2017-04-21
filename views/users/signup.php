@@ -1,15 +1,13 @@
-<link rel="stylesheet" href="/../css/items_styles.css">
 
 <div class="container">
-
     <section id="login">
-
-        <h1 class="section-title">Signup For Pie Piper</h1>
         <div class="row">
-
-
+            <div class="col-md-6 offset-md-3 col-sm offset-sm-0">
+                <h1 class="section-title">Signup For Pie Piper</h1>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-6 offset-sm-0 col-md-6 offset-md-3">
-
                 <p id="form-description">Please fill out the information below so we can create your account.</p>
                 <?php if (isset($_SESSION['ERROR_MESSAGE'])) : ?>
                     <div class="alert alert-danger">
@@ -46,13 +44,8 @@
                             <a href="/login" class="btn btn-success">Go To Login</a>
                         </div>
                     </div>
-
                 </form>
-
             </div>
-
         </div>
-
     </section>
-
 </div>
