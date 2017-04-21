@@ -103,6 +103,18 @@ function pageController()
 
         case '/signup' :
             $mainView = '../views/users/signup.php';
+            $user = new User();
+
+            if(Input::has("name")){
+                if(!empty(Input::get("name")) && !empty(Input::get("email")) && !empty(Input::get("username")) && !empty(Input::get("password"))){
+                
+                    if($user::findByUsernameOrEmail(Input::get("email")) === null && $user::findByUsernameOrEmail(Input::get("username")) === null){
+                        $user::insertUser(Input::get("name"), Input::get("email"), Input::get("username"), Input::get("password"));
+                    }
+                }
+            }
+        
+
             break;
 
         case '/logout' :

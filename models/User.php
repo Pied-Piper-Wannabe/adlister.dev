@@ -46,6 +46,7 @@ class User extends Model {
 
 
     public static function attempt($username, $password) {
+        self::dbConnect();
         $userInfo = self::findByUsernameOrEmail($username);
         if ($userInfo !== null) {
             if (($username === $userInfo->username || $username === $userInfo->email) && (password_verify($password, $userInfo->password))) { 
@@ -85,6 +86,20 @@ class User extends Model {
         session_regenerate_id();
         session_destroy();
         session_start();
+    }
+
+    public static function insertUser($name, $email, $username, $password) {
+        self::dbConnect();
+
+        $insert = "INSERT INTO " . self::$table . " (name, email, username, password)
+        VALUES (:name, :email, :username, :password)";
+        $statement = self::$dbc->prepare($insert);
+
+        $statement->bindValue(':name', $name, PDO::PARAM_STR);
+        $statement->bindValue(':email', $email, PDO::PARAM_STR);
+        $statement->bindValue(':username', $username, PDO::PARAM_STR);
+        $statement->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);
+        $statement->execute();
     }
 
 
