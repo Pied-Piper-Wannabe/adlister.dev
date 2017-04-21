@@ -11,19 +11,31 @@
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Name:</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" id="productNameText">
+                        <input class="form-control" name="name" type="text" id="productNameText">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">Brand:</label>
+                    <div class="col-10">
+                        <input class="form-control" name="brand" type="text" id="productBrandText">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">Category:</label>
+                    <div class="col-10">
+                        <input class="form-control" name="category" type="text" id="productCategoryText">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Price:</label>
                     <div class="col-10">
-                        <input class="form-control" type="number" id="priceText">
+                        <input class="form-control" name="price" type="number" id="priceText">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Description:</label>
                     <div class="col-10">
-                        <textarea class="form-control" placeholder="Product Description Here" id="descriptionTextarea" rows="5"></textarea>
+                        <textarea class="form-control" name="description" placeholder="Product Description Here" id="descriptionTextarea" rows="5"></textarea>
                     </div>
                 </div>
                 <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
