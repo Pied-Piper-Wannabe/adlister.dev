@@ -76,6 +76,12 @@ function pageController()
 
         case '/account' :
             $mainView = '../views/users/account.php';
+            $user = new User;
+            $userInfo = $user::findByUsernameOrEmail($_SESSION['LOGGED_IN_USER']);
+            $data['name'] = $userInfo->name;
+            $data['username'] = $userInfo->username;
+            $data['email'] = $userInfo->email;
+
             break;
 
         case '/edit-user' :
@@ -113,16 +119,12 @@ function pageController()
                     }
                 }
             }
-        
-
             break;
 
         case '/logout' :
             $user = new User;
             $user::logout();
             header("Location: http://adlister.dev/");
-
-
             break;
 
         default:    // displays 404 if route not specified above

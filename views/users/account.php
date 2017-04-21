@@ -10,10 +10,10 @@
         <div class="col-sm offset-sm-0 col-md-6 offset-md-3">
             <h3>Profile Info:</h3>
             <ul class="list-group">
-                <li class="list-group-item">Name:</li>
-                <li class="list-group-item">Username:</li>
-                <li class="list-group-item">Email:</li>
-                <li class="list-group-item">Password:</li>
+                <li class="list-group-item">Name: <?=$name?></li>
+                <li class="list-group-item">Username: <?=$username?></li>
+                <li class="list-group-item">Email: <?=$email?></li>
+                <li class="list-group-item">Password: ********</li>
             </ul>
             <input type="button" class="btn btn-success float-right topMargin" value="Edit Profile" onclick="location.href = '/edit-user';">
         </div>
