@@ -116,11 +116,12 @@ img {
   right: 0;
   bottom: 0;
   height: 50px;
-  width: 630px; }
+  width: 630px;
+  font-family: "mermaid"; }
 
 #jobsText h1 {
   font-size: 50px;
-  color: #D7F171;
+  color: #08ff00;
   -webkit-text-stroke: 1px;
   -webkit-text-stroke-color: black; }
 
@@ -132,6 +133,9 @@ img {
 
 #shopButton {
   border-radius: 5px 0px 0px 5px; }
+
+#jared {
+  height: auto; }
 
 @font-face {
   font-family: "mermaid";

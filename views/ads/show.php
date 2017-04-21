@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-8 col-sm">
             <div class="adPhoto whiteBox">
-                <img src="../img/uploads/<?= $results->photodir ?>">
+                <img src="/img/<?= $results->photodir ?>">
             </div>
         </div>
         <div class="col-md-4 col-sm">
