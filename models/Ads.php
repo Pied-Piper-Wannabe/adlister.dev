@@ -36,4 +36,21 @@ class Ads extends Model {
         return($results);
     }
 
+    public static function insertAd($name, $category, $brand, $price, $description, $photodir = "", $user_id = "1") {
+        self::dbConnect();
+
+        $insert = "INSERT INTO " . self::$table . " (name, category, brand, price, description, photodir, user_id)
+        VALUES (:name, :category, :brand, :price, :description, :photodir, :user_id)";
+        $statement = self::$dbc->prepare($insert);
+
+        $statement->bindValue(':name', $name, PDO::PARAM_STR);
+        $statement->bindValue(':category', $category, PDO::PARAM_STR);
+        $statement->bindValue(':brand', $brand, PDO::PARAM_STR);
+        $statement->bindValue(':price', $price, PDO::PARAM_STR);
+        $statement->bindValue(':description', $description, PDO::PARAM_STR);
+        $statement->bindValue(':photodir', $photodir, PDO::PARAM_STR);
+        $statement->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+
 }
