@@ -38,7 +38,7 @@
                         <textarea class="form-control" name="description" placeholder="Product Description Here" id="descriptionTextarea" rows="5"></textarea>
                     </div>
                 </div>
-                <input type="file" name="photodir" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                <input type="file" name="file" class="form-control-file" id="file" aria-describedby="fileHelp">
                 <small id="fileHelp" class="form-text text-muted">Photos must be smaller than 3mb and in one of the following formats: PNG, JPG, JPEG</small>
                 <button type="submit" class="btn btn-success float-right topMargin">Submit</button>
             </form>

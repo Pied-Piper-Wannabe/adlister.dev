@@ -34,7 +34,8 @@ function pageController()
             }
 
             if(Input::has("photodir")){
-                saveUploadedImage(Input::get("photodir"));
+                var_dump($_FILE);
+                saveUploadedImage("photodir");
             }
 
             break;
