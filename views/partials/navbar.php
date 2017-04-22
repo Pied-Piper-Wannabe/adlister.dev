@@ -41,7 +41,7 @@
         </div>
     </div>
     <?PHP else : ?>
-        <a href="/login" class="btn btn-outline-success" role="button" aria-disabled="true">Login</a>
+        <a href="/login" id="profileButton" class="btn btn-outline-success" role="button" aria-disabled="true">Login</a>
     <?PHP endif; ?>
     </div>
 </nav>

@@ -24,11 +24,17 @@ function pageController()
         case '/create' :
             $mainView = '../views/ads/create.php';
             $ads = new Ads();
+            $photodir = "";
 
             if(Input::has("name")){
                 if(!empty(Input::get("name")) && !empty(Input::get("category")) && !empty(Input::get("brand")) && !empty(Input::get("price")) && !empty(Input::get("description"))){
-            
-                    $ads::insertAd(Input::get("name"), Input::get("category"), Input::get("brand"), Input::get("price"),  Input::get("description"));
+
+                    if($_FILES != null){
+                        $photodir = saveUploadedImage("photodir");
+                        $ads::insertAd(Input::get("name"), Input::get("category"), Input::get("brand"), Input::get("price"), Input::get("description"), $photodir);
+                    }else{
+                        $ads::insertAd(Input::get("name"), Input::get("category"), Input::get("brand"), Input::get("price"), Input::get("description"));
+                    }
                 }
             }
             break;
