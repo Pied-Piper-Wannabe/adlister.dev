@@ -17,7 +17,7 @@ class FileUploadException extends Exception { }
 function saveUploadedImage($inputName) {
     $maxUploadSize = 1024000000;
     $validFileExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-    $uploadsDirectory = 'img/uploads';
+    $uploadsDirectory = 'img/';
 
     // make sure the input exists and is a file
     if (! isset($_FILES[$inputName])) {
