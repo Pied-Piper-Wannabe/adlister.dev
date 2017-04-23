@@ -22,13 +22,29 @@
         <div class="col-sm offset-sm-0 col-md-6 offset-md-3">
             <h3>Your Ads:</h3>
             <div class="list-group">
-                  <a href="/edit" class="list-group-item list-group-item-action">Cras justo odio</a>
-                  <a href="/edit" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-                  <a href="/edit" class="list-group-item list-group-item-action">Morbi leo risus</a>
-                  <a href="/edit" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-                  <a href="/edit" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+                <?PHP foreach($results as $result) : ?>
+                  <a href="/edit" class="list-group-item list-group-item-action"><?=$result["name"]?></a>
+                 <?PHP endforeach; ?>
             </div>
             <input type="button" class="btn btn-success float-right topMargin" value="Create Ad" onclick="location.href = '/create';">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col centerText">
+            <?PHP if ($page > 1) : ?>
+                <a class="btn btn-outline-success" href="http://adlister.dev/account?page=<?= $page - 1 ?>" role="button">Previous</a>
+            <?PHP else : ?>
+                <a class="btn btn-outline-success disabled" href="http://adlister.dev/account?page=<?= $page - 1 ?>" role="button">Previous</a>
+            <?PHP endif; ?>
+
+            <?PHP if ($page < $pages) : ?>
+                <a class="btn btn-outline-success" href="http://adlister.dev/account?page=<?= $page + 1 ?>" role="button">Next</a>
+            <?PHP else : ?>
+                <a class="btn btn-outline-success disabled" href="http://adlister.dev/account?page=<?= $page + 1 ?>" role="button">Next</a>
+            <?PHP endif; ?>
+            <!-- Return current page and total number of results -->
+            <p>Page: <?= $page ?> of <?= $pages ?></p>
+            <p>Total Results: <?= $total ?></p>
         </div>
     </div>
 </div>
