@@ -39,7 +39,7 @@
             <?PHP endif; ?>
             <!-- Return current page and total number of results -->
             <p>Page: <?= $page ?> of <?= $pages ?></p>
-            <p>Total Results: <?= $totalResults ?></p>
+            <p>Total Results: <?= $total ?></p>
         </div>
     </div>
 </div>

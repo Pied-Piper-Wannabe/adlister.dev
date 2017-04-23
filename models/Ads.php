@@ -5,11 +5,13 @@ require_once __DIR__ . '/Model.php';
 class Ads extends Model {
     protected static $table = 'ads';
 
-    public static function count() {
+    public static function count($cat = "") {
         self::dbConnect();
-        $query = self::$dbc->query("SELECT COUNT(*) FROM " . static::$table)->fetchColumn();
+        $stmt = self::$dbc->query("SELECT COUNT(*) FROM " . static::$table . $cat);
+        $row = $stmt->fetch(PDO::FETCH_NUM);
+        $count = $row[0];
 
-        return $query;
+        return $count;
     }
 
     public static function paginate($pageNo, $cat, $resultsPerPage = 10) {
