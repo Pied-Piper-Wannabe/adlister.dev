@@ -24,16 +24,21 @@ function pageController()
         case '/create' :
             $mainView = '../views/ads/create.php';
             $ads = new Ads();
+            $user = new User();
             $photodir = "";
+
+            $userInfo = $user::findByUsernameOrEmail($_SESSION['LOGGED_IN_USER']);
+            $userId = $userInfo->id;
+
 
             if(Input::has("name")){
                 if(!empty(Input::get("name")) && !empty(Input::get("category")) && !empty(Input::get("brand")) && !empty(Input::get("price")) && !empty(Input::get("description"))){
 
                     if($_FILES != null){
                         $photodir = saveUploadedImage("photodir");
-                        $ads::insertAd(Input::get("name"), Input::get("category"), Input::get("brand"), Input::get("price"), Input::get("description"), $photodir);
+                        $ads::insertAd(Input::get("name"), Input::get("category"), Input::get("brand"), Input::get("price"), Input::get("description"), $photodir, $userId);
                     }else{
-                        $ads::insertAd(Input::get("name"), Input::get("category"), Input::get("brand"), Input::get("price"), Input::get("description"));
+                        $ads::insertAd(Input::get("name"), Input::get("category"), Input::get("brand"), Input::get("price"), Input::get("description"), "", $userId);
                     }
                 }
             }
@@ -51,8 +56,14 @@ function pageController()
             }
 
             $ads = new Ads();
+            $user = new User();
             //Grab specific Ad by ID
             $data["results"] = $ads::find($data['id']);
+
+            //Grabs user info and sets only needed info for data display
+            $userInfo = $user::findByUsernameOrEmail($data["results"]->user_id);
+            $data["userEmail"] = $userInfo->email;
+            $data["username"] = $userInfo->username;
             break;
 
         case '/items' :

@@ -25,11 +25,12 @@ class User extends Model {
     {
         self::dbConnect();
 
-        $query = 'SELECT * FROM ' . self::$table . ' WHERE username = :username OR email = :email';
+        $query = 'SELECT * FROM ' . self::$table . ' WHERE username = :username OR email = :email OR id = :id';
 
         $stmt = self::$dbc->prepare($query);
         $stmt->bindValue(':username', $usernameOrEmail, PDO::PARAM_STR);
         $stmt->bindValue(':email', $usernameOrEmail, PDO::PARAM_STR);
+        $stmt->bindValue(':id', $usernameOrEmail, PDO::PARAM_INT);
         $stmt->execute();
 
         $results = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -49,7 +50,7 @@ class User extends Model {
         self::dbConnect();
         $userInfo = self::findByUsernameOrEmail($username);
         if ($userInfo !== null) {
-            if (($username === $userInfo->username || $username === $userInfo->email) && (password_verify($password, $userInfo->password))) { 
+            if (($username === $userInfo->username || $username === $userInfo->email) && (password_verify($password, $userInfo->password))) {
                 $log = new Log();
                 $log->info("User $username logged in.");
                 $_SESSION['LOGGED_IN_USER'] = $userInfo->username;
@@ -63,7 +64,7 @@ class User extends Model {
             return false;
         }
 
-        
+
     }
     public static function check() {
         if(isset($_SESSION['LOGGED_IN_USER'])) {
@@ -72,13 +73,13 @@ class User extends Model {
             return false;
         }
     }
-    
+
     // public static function user() {
     //     if(Auth::check() === true) {
-    //         return $_SESSION['LOGGED_IN_USER']; 
+    //         return $_SESSION['LOGGED_IN_USER'];
     //     }else {
     //         return null;
-    //     } 
+    //     }
     // }
 
     public static function logout() {
