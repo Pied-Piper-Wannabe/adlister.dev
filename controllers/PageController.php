@@ -51,8 +51,13 @@ function pageController()
             }
 
             $ads = new Ads();
+            $user = new User();
             //Grab specific Ad by ID
             $data["results"] = $ads::find($data['id']);
+
+            $userInfo = $user::findByUsernameOrEmail($data["results"]->user_id);
+            $data["userEmail"] = $userInfo->email;
+            $data["username"] = $userInfo->username;
             break;
 
         case '/items' :

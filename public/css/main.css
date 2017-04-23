@@ -105,6 +105,10 @@ img {
   text-align: center;
   line-height: 15px; }
 
+.sidenote {
+  color: gray;
+  font-size: 11px; }
+
 .centerText {
   text-align: center; }
 

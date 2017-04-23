@@ -19,11 +19,12 @@
                 <h2 class="adBrand"><?=$results->brand?></h2>
                 <p class="adDesc"><?=$results->description?></p>
                 <h2 class="adPrice">$<?=$results->price?></h2>
-                <button type="button" class="btn btn-success btn-lg btn-block">Contact Seller</button>
+                <a href='mailto:<?=$userEmail?>' class="btn btn-success btn-lg btn-block" role="button">Contact Seller</a>
+                <p class="sidenote">Right click -> "Copy Email Address" if you do not have email client.</p>
             </div>
             <div class="adAbout">ABOUT THE SELLER</div>
             <div class="adUser whiteBox">
-                <h1>Test User</h1>
+                <h1><?=$username?></h1>
             </div>
         </div>
     </div>
