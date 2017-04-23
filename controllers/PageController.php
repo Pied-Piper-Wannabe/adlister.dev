@@ -101,11 +101,34 @@ function pageController()
         case '/account' :
             $mainView = '../views/users/account.php';
             $user = new User;
+            $ads = new Ads();
+            //Display User info
             $userInfo = $user::findByUsernameOrEmail($_SESSION['LOGGED_IN_USER']);
             $data['name'] = $userInfo->name;
             $data['username'] = $userInfo->username;
             $data['email'] = $userInfo->email;
 
+            //Setup Ad info
+            $cat = " WHERE user_id = '$userInfo->id' ORDER BY id DESC ";
+
+            //Sets current page
+            if (Input::has("page")) {
+                $data['page'] = Input::get("page");
+            }else{
+                $data['page'] = 1;
+            }
+
+            //Outputs Results
+            $data['results'] = ($ads::paginate($data['page'], $cat, 5));
+
+            //Calculate total # of pages for both all and if a catagory is selected
+            $data['total'] = $ads::count($cat);
+            $data['pages'] = ceil($data['total'] / 5);
+
+            //Prevents overflow of pages
+            if ($data['page'] >= $data['pages']) {
+                $data['page'] = $data['pages'];
+            }
             break;
 
         case '/edit-user' :
