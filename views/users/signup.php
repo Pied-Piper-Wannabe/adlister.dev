@@ -1,5 +1,9 @@
-
-<div class="container">
+<div id="signupCover">
+    <!-- <div id="joinUsDiv">
+        <h1 id="joinUs">Join Us</h1>
+    </div> -->
+</div>
+<div class="container botPadding">
     <section id="login">
         <div class="row">
             <div class="col-md-6 offset-md-3 col-sm offset-sm-0">
