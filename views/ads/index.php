@@ -1,6 +1,17 @@
 <!--Page for an index of advertisements-->
 <div class='container-fluid topMargin'>
     <div class="row">
+        <ol class="breadcrumb">
+            <?PHP if(Input::has("cat")) : ?>
+            <li class="breadcrumb-item"><a href="/items">All</a></li>
+            <li class="breadcrumb-item active"><?= Input::get("cat")?></a></li>
+            <?PHP else : ?>
+            <li class="breadcrumb-item active">All</li>
+            <?PHP endif; ?>
+
+        </ol>
+    </div>
+    <div class="row">
         <?PHP foreach ($results as $result) : ?>
             <div class="card" style="width: 20rem;">
                 <a href="http://adlister.dev/show?id=<?= $result['id']?>&cat=<?=$result['category']?>"><img class="card-img-top" src="<?= $result['photodir']?>" alt="Card image cap" style="width: 100%"></a>
