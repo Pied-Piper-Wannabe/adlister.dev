@@ -21,9 +21,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="example-text-input" class="col-2 col-form-label">Category:</label>
+                    <label class="col-2 col-form-label" for="exampleSelect1">Category:</label>
                     <div class="col-10">
-                        <input class="form-control" name="category" type="text" id="productCategoryText">
+                        <select class="form-control" name="category" id="productCategory">
+                            <option>Software</option>
+                            <option>Hardware</option>
+                            <option>Rockets</option>
+                            <option>Investment</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
