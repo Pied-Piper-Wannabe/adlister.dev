@@ -23,7 +23,7 @@
             <h3>Your Ads:</h3>
             <div class="list-group">
                 <?PHP foreach($results as $result) : ?>
-                  <a href="/edit" class="list-group-item list-group-item-action"><?=$result["name"]?></a>
+                  <a href="/show?id=<?=$result["id"]?>&cat=<?=$result["category"]?>" class="list-group-item list-group-item-action"><?=$result["name"]?></a>
                  <?PHP endforeach; ?>
             </div>
             <input type="button" class="btn btn-success float-right topMargin" value="Create Ad" onclick="location.href = '/create';">
