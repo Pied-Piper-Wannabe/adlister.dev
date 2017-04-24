@@ -10,6 +10,12 @@ img {
   width: 100%;
   height: auto; }
 
+h1, h2, h3 {
+  font-family: "ralewayBold"; }
+
+p {
+  font-family: "ralewayRegular"; }
+
 .container {
   margin-top: 20px; }
 
@@ -123,14 +129,14 @@ img {
   right: 0;
   bottom: 0;
   height: 50px;
-  width: 630px;
-  font-family: "mermaid"; }
+  width: 630px; }
 
 #jobsText h1 {
   font-size: 50px;
   color: #08ff00;
   -webkit-text-stroke: 1px;
-  -webkit-text-stroke-color: black; }
+  -webkit-text-stroke-color: black;
+  font-family: "mermaid"; }
 
 #searchButton {
   border-radius: 0px 5px 5px 0px; }

@@ -1,13 +1,12 @@
-<?php
-
-
-?>
-
 <div class="container">
     <section id="login">
         <div class="row">
-            <h1 class="section-title">Edit Account</h1>
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="section-title">Edit Account</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
                 <p>Please fill out the information below so we can update your account.</p>
                 <?php if (isset($_SESSION['ERROR_MESSAGE'])) : ?>
                     <div class="alert alert-danger">
