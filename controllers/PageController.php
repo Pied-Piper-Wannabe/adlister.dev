@@ -124,6 +124,11 @@ function pageController()
                 $cat = " WHERE category = '$value'";
             }
 
+            if(Input::has("a")){
+                $value = Input::get("a");
+                $cat = " WHERE category LIKE '%$value%' OR name LIKE '%$value%' OR brand LIKE '%$value%'";
+            }
+
             //Outputs Results
             $data['results'] = ($ads::paginate($data['page'], $cat));
 
@@ -246,6 +251,12 @@ function pageController()
     }
 
     $data['mainView'] = $mainView;
+
+    //Search Bar Functionality
+    if(Input::has("search")){
+        header("Location: http://adlister.dev/items?a=" . Input::get('search'));
+        die();
+    }
 
 
     return $data;
