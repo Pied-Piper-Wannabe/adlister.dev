@@ -60,7 +60,9 @@ function pageController()
                     $data['description'] = $adInfo->description;
                     $data['category'] = $adInfo->category;
                     $data['brand'] = $adInfo->brand;
+                    $data['id'] = $adInfo->id;
 
+                    //If fields filled in... updates ad with new info.
                     if(Input::has("name")){
                         if(!empty(Input::get("name"))
                         && !empty(Input::get("category"))
@@ -88,6 +90,11 @@ function pageController()
                             echo("All fields required");
                         }
                     }
+                    if(Input::has("delete")){
+                        $ads->id = $adInfo->id;
+                        $ads->delete();
+                        header("Location: http://adlister.dev/account");
+                    }
                 }else{
                     $mainView = '../views/404.php';
                 }
@@ -101,7 +108,6 @@ function pageController()
 
         case '/show' :
             $mainView = '../views/ads/show.php';
-            $url = "";
             //need to output: info on the topic, choose by id from database,
             if (Input::has("id")){
                 $data['id'] = Input::get("id");
@@ -121,6 +127,7 @@ function pageController()
         case '/items' :
             $mainView = '../views/ads/index.php';
             $data['page'] = 1;
+            $data['url'] = "";
             $ads = new Ads();
             $cat = "";
 

@@ -41,7 +41,7 @@
                 </div>
                 <input type="file" class="form-control-file" name="photodir" id="photoedit" aria-describedby="fileHelp">
                 <small id="fileHelp" class="form-text text-muted">Photos must be smaller than 3mb and in one of the following formats: PNG, JPG, JPEG</small>
-                <a href='#' class="btn btn-danger" role="button">Delete</a>
+                <a href='/edit?id=<?=$id?>&delete=true' class="btn btn-danger" role="button">Delete</a>
                 <button type="submit" class="btn btn-success float-right">Update</button>
             </form>
         </div>
