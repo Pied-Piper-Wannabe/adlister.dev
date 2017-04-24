@@ -8,7 +8,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <form class="form-inline my-2 my-lg-0 mr-auto">
-            <input class="form-control mr-sm-2 searchbar" type="text" placeholder="Search">
+            <input class="form-control mr-sm-2 searchbar" name="search" type="text" placeholder="Search">
             <button class="btn btn-success my-2 my-sm-0" id="searchButton" type="submit">Search</button>
         </form>
     <!-- Shop Button -->
