@@ -45,45 +45,64 @@ function pageController()
             break;
 
         case '/edit' :
-            $mainView = '../views/ads/edit.php';
             $ads = new Ads();
-            //Finds Ad
+            $user = new User();
             $adInfo = $ads::find(Input::get("id"));
-            var_dump($adInfo);
-            //Asigns current ad values to output
-            $data['name'] = $adInfo->name;
-            $data['price'] = $adInfo->price;
-            $data['description'] = $adInfo->description;
-            $data['category'] = $adInfo->category;
-            $data['brand'] = $adInfo->brand;
+            $userInfo = $user::findByUsernameOrEmail($adInfo->user_id);
 
-            if(Input::has("name")){
-                if(!empty(Input::get("name"))
-                && !empty(Input::get("category"))
-                && !empty(Input::get("brand"))
-                && !empty(Input::get("price"))
-                && !empty(Input::get("description")))
-                {
-                    $ads->id = $adInfo->id;
-                    $ads->name = Input::get("name");
-                    $ads->category = Input::get("category");
-                    $ads->brand= Input::get("brand");
-                    $ads->price = Input::get("price");
-                    $ads->description = Input::get("description");
-                    $ads->user_id = $adInfo->user_id;
+            if(isset($_SESSION['LOGGED_IN_USER'])){
+                if($_SESSION['LOGGED_IN_USER'] === $userInfo->username){
+                    $mainView = '../views/ads/edit.php';
+                    //Finds Ad
+                    //Asigns current ad values to output
+                    $data['name'] = $adInfo->name;
+                    $data['price'] = $adInfo->price;
+                    $data['description'] = $adInfo->description;
+                    $data['category'] = $adInfo->category;
+                    $data['brand'] = $adInfo->brand;
+                    $data['id'] = $adInfo->id;
 
-                    if($_FILES != null){
-                        $ads->photodir = saveUploadedImage("photodir");
-                    }else{
-                        $ads->photodir = $adInfo->photodir;
+                    //If fields filled in... updates ad with new info.
+                    if(Input::has("name")){
+                        if(!empty(Input::get("name"))
+                        && !empty(Input::get("category"))
+                        && !empty(Input::get("brand"))
+                        && !empty(Input::get("price"))
+                        && !empty(Input::get("description")))
+                        {
+                            $ads->id = $adInfo->id;
+                            $ads->name = Input::get("name");
+                            $ads->category = Input::get("category");
+                            $ads->brand= Input::get("brand");
+                            $ads->price = Input::get("price");
+                            $ads->description = Input::get("description");
+                            $ads->user_id = $adInfo->user_id;
+
+                            if($_FILES != null){
+                                $ads->photodir = saveUploadedImage("photodir");
+                            }else{
+                                $ads->photodir = $adInfo->photodir;
+                            }
+                            $ads->updateAd();
+                            header("Location: http://adlister.dev");
+                            die();
+                        }else{
+                            echo("All fields required");
+                        }
                     }
-                    $ads->updateAd();
-                    header("Location: http://adlister.dev");
-                    die();
+                    if(Input::has("delete")){
+                        $ads->id = $adInfo->id;
+                        $ads->delete();
+                        header("Location: http://adlister.dev/account");
+                    }
                 }else{
-                    echo("All fields required");
+                    $mainView = '../views/404.php';
                 }
+            }else{
+                $mainView = '../views/404.php';
             }
+
+
 
             break;
 
@@ -108,6 +127,7 @@ function pageController()
         case '/items' :
             $mainView = '../views/ads/index.php';
             $data['page'] = 1;
+            $data['url'] = "";
             $ads = new Ads();
             $cat = "";
 
@@ -121,11 +141,13 @@ function pageController()
             //Re-asigns $cat if there is a catagory selected
             if (Input::has("cat")){
                 $value = Input::get("cat");
+                $data['url'] = "&cat=" . Input::get("cat");
                 $cat = " WHERE category = '$value'";
             }
-
+            //Checks for search pass and assigns cat to pass new query
             if(Input::has("a")){
                 $value = Input::get("a");
+                $data['url'] = "&a=" . Input::get("a");
                 $cat = " WHERE category LIKE '%$value%' OR name LIKE '%$value%' OR brand LIKE '%$value%'";
             }
 
@@ -176,39 +198,41 @@ function pageController()
             break;
 
         case '/edit-user' :
-            $mainView = '../views/users/edit.php';
-            $user = new User;
-            $userInfo = $user::findByUsernameOrEmail($_SESSION['LOGGED_IN_USER']);
-            $data['name'] = $userInfo->name;
-            $data['username'] = $userInfo->username;
-            $data['email'] = $userInfo->email;
+            if(isset($_SESSION['LOGGED_IN_USER'])){
+                $mainView = '../views/users/edit.php';
+                $user = new User;
+                $userInfo = $user::findByUsernameOrEmail($_SESSION['LOGGED_IN_USER']);
+                $data['name'] = $userInfo->name;
+                $data['username'] = $userInfo->username;
+                $data['email'] = $userInfo->email;
 
-            //Checks to ensure username set and fields not empty
-            if(Input::has("username")){
-                if(!empty(Input::get("name"))
-                && !empty(Input::get("email"))
-                && !empty(Input::get("username"))
-                && !empty(Input::get("password"))
-                && !empty(Input::get("passwordVerify")))
-                {
-                    //Checks to ensure password and verify match then udpates user info TODO: Prevent duplicates
-                    if(Input::get("password") === Input::get("passwordVerify")){
-                        $user->id = $userInfo->id;
-                        $user->name = Input::get("name");
-                        $user->email = Input::get("email");
-                        $user->username = Input::get("username");
-                        $newUsername = Input::get("username");
-                        $user->password = Input::get("password");
-                        $user->updateUser($newUsername);
+                //Checks to ensure username set and fields not empty
+                if(Input::has("username")){
+                    if(!empty(Input::get("name"))
+                    && !empty(Input::get("email"))
+                    && !empty(Input::get("username"))
+                    && !empty(Input::get("password"))
+                    && !empty(Input::get("passwordVerify")))
+                    {
+                        //Checks to ensure password and verify match then udpates user info TODO: Prevent duplicates
+                        if(Input::get("password") === Input::get("passwordVerify")){
+                            $user->id = $userInfo->id;
+                            $user->name = Input::get("name");
+                            $user->email = Input::get("email");
+                            $user->username = Input::get("username");
+                            $newUsername = Input::get("username");
+                            $user->password = Input::get("password");
+                            $user->updateUser($newUsername);
+                        }else{
+                            echo("Passwords do not match");
+                        }
                     }else{
-                        echo("Passwords do not match");
+                        echo("All fields required");
                     }
-                }else{
-                    echo("All fields required");
                 }
+            }else{
+                $mainView = '../views/404.php';
             }
-
-
             break;
 
         case '/login' :
