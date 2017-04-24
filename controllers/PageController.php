@@ -89,6 +89,7 @@ function pageController()
 
         case '/show' :
             $mainView = '../views/ads/show.php';
+            $url = "";
             //need to output: info on the topic, choose by id from database,
             if (Input::has("id")){
                 $data['id'] = Input::get("id");
@@ -121,11 +122,13 @@ function pageController()
             //Re-asigns $cat if there is a catagory selected
             if (Input::has("cat")){
                 $value = Input::get("cat");
+                $data['url'] = "&cat=" . Input::get("cat");
                 $cat = " WHERE category = '$value'";
             }
-
+            //Checks for search pass and assigns cat to pass new query
             if(Input::has("a")){
                 $value = Input::get("a");
+                $data['url'] = "&a=" . Input::get("a");
                 $cat = " WHERE category LIKE '%$value%' OR name LIKE '%$value%' OR brand LIKE '%$value%'";
             }
 
