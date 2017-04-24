@@ -1,5 +1,5 @@
 <!--Page for an index of advertisements-->
-<div class='container-fluid topMargin'>
+<div class="container">
     <div class="row">
         <ol class="breadcrumb">
             <?PHP if(Input::has("cat")) : ?>
@@ -8,9 +8,10 @@
             <?PHP else : ?>
             <li class="breadcrumb-item active">All</li>
             <?PHP endif; ?>
-
         </ol>
     </div>
+</div>
+<div class='container-fluid topMargin'>
     <div class="row">
         <?PHP foreach ($results as $result) : ?>
             <div class="card" style="width: 20rem;">
