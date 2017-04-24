@@ -46,6 +46,45 @@ function pageController()
 
         case '/edit' :
             $mainView = '../views/ads/edit.php';
+            $ads = new Ads();
+            //Finds Ad
+            $adInfo = $ads::find(Input::get("id"));
+            var_dump($adInfo);
+            //Asigns current ad values to output
+            $data['name'] = $adInfo->name;
+            $data['price'] = $adInfo->price;
+            $data['description'] = $adInfo->description;
+            $data['category'] = $adInfo->category;
+            $data['brand'] = $adInfo->brand;
+
+            if(Input::has("name")){
+                if(!empty(Input::get("name"))
+                && !empty(Input::get("category"))
+                && !empty(Input::get("brand"))
+                && !empty(Input::get("price"))
+                && !empty(Input::get("description")))
+                {
+                    $ads->id = $adInfo->id;
+                    $ads->name = Input::get("name");
+                    $ads->category = Input::get("category");
+                    $ads->brand= Input::get("brand");
+                    $ads->price = Input::get("price");
+                    $ads->description = Input::get("description");
+                    $ads->user_id = $adInfo->user_id;
+
+                    if($_FILES != null){
+                        $ads->photodir = saveUploadedImage("photodir");
+                    }else{
+                        $ads->photodir = $adInfo->photodir;
+                    }
+                    $ads->updateAd();
+                    header("Location: http://adlister.dev");
+                    die();
+                }else{
+                    echo("All fields required");
+                }
+            }
+
             break;
 
         case '/show' :

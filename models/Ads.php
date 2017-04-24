@@ -55,4 +55,9 @@ class Ads extends Model {
         $statement->execute();
     }
 
+    public function updateAd(){
+        self::dbConnect();
+        $this->update();
+    }
+
 }
