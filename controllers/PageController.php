@@ -139,6 +139,32 @@ function pageController()
             $data['username'] = $userInfo->username;
             $data['email'] = $userInfo->email;
 
+            //Checks to ensure username set and fields not empty
+            if(Input::has("username")){
+                if(!empty(Input::get("name"))
+                && !empty(Input::get("email"))
+                && !empty(Input::get("username"))
+                && !empty(Input::get("password"))
+                && !empty(Input::get("passwordVerify")))
+                {
+                    //Checks to ensure password and verify match then udpates user info TODO: Prevent duplicates
+                    if(Input::get("password") === Input::get("passwordVerify")){
+                        $user->id = $userInfo->id;
+                        $user->name = Input::get("name");
+                        $user->email = Input::get("email");
+                        $user->username = Input::get("username");
+                        $newUsername = Input::get("username");
+                        $user->password = Input::get("password");
+                        $user->updateUser($newUsername);
+                    }else{
+                        echo("Passwords do not match");
+                    }
+                }else{
+                    echo("All fields required");
+                }
+            }
+
+
             break;
 
         case '/login' :

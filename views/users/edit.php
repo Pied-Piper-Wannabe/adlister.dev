@@ -37,7 +37,10 @@
                     <div class="form-group">
                         <label>Password</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="password" value="" data-required>
-                        <p class="sidenote">Please re-enter or change your password</p>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="passwordVerify" name="passwordVerify" placeholder="re-enter password" value="" data-required>
+                        <p class="sidenote">Please re-enter or change your password for changes to take effect.</p>
                     </div>
                     <button type="submit" class="btn btn-success">Update Account</button>
                 </form>

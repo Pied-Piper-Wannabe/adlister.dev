@@ -103,5 +103,14 @@ class User extends Model {
         $statement->execute();
     }
 
+    public function updateUser($newUsername){
+        self::dbConnect();
+        $this->update();
+
+        //Update User Session
+        $userInfo = self::findByUsernameOrEmail($newUsername);
+        $_SESSION['LOGGED_IN_USER'] = $userInfo->username;
+    }
+
 
 }
