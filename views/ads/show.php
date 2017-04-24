@@ -25,6 +25,11 @@
             <div class="adAbout">ABOUT THE SELLER</div>
             <div class="adUser whiteBox">
                 <h1><?=$username?></h1>
+                <?PHP if(isset($_SESSION['LOGGED_IN_USER'])) : ?>
+                <?PHP if($_SESSION['LOGGED_IN_USER'] === $username) : ?>
+                    <a href='/edit?id=<?= $results->id ?>' class="btn btn-success btn-lg btn-block" role="button">Edit Ad</a>
+                <?PHP endif; ?>
+                <?PHP endif; ?>
             </div>
         </div>
     </div>
