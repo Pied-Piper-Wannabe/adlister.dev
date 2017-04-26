@@ -38,6 +38,7 @@ class Ads extends Model {
         return($results);
     }
 
+    //TODO: Replace this with Model function call
     public static function insertAd($name, $category, $brand, $price, $description, $photodir = "", $user_id = "1") {
         self::dbConnect();
 

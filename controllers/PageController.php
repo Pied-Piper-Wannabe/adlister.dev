@@ -30,10 +30,11 @@ function pageController()
             $userInfo = $user::findByUsernameOrEmail($_SESSION['LOGGED_IN_USER']);
             $userId = $userInfo->id;
 
-
+            //Ensures required fields are typed in before taking user input and uploading it to DB
             if(Input::has("name")){
                 if(!empty(Input::get("name")) && !empty(Input::get("category")) && !empty(Input::get("brand")) && !empty(Input::get("price")) && !empty(Input::get("description"))){
 
+                    //Checks to see if user uploaded file
                     if($_FILES != null){
                         $photodir = saveUploadedImage("photodir");
                         $ads::insertAd(Input::get("name"), Input::get("category"), Input::get("brand"), Input::get("price"), Input::get("description"), $photodir, $userId);
@@ -50,6 +51,7 @@ function pageController()
             $adInfo = $ads::find(Input::get("id"));
             $userInfo = $user::findByUsernameOrEmail($adInfo->user_id);
 
+            //Check that user is logged in and is the user of the ad before allowing them to enter or edit
             if(isset($_SESSION['LOGGED_IN_USER'])){
                 if($_SESSION['LOGGED_IN_USER'] === $userInfo->username){
                     $mainView = '../views/ads/edit.php';
@@ -84,7 +86,7 @@ function pageController()
                                 $ads->photodir = $adInfo->photodir;
                             }
                             $ads->updateAd();
-                            header("Location: http://adlister.dev");
+                            header("Location: /");
                             die();
                         }else{
                             echo("All fields required");
@@ -93,7 +95,7 @@ function pageController()
                     if(Input::has("delete")){
                         $ads->id = $adInfo->id;
                         $ads->delete();
-                        header("Location: http://adlister.dev/account");
+                        header("Location: /");
                     }
                 }else{
                     $mainView = '../views/404.php';
@@ -101,9 +103,6 @@ function pageController()
             }else{
                 $mainView = '../views/404.php';
             }
-
-
-
             break;
 
         case '/show' :
@@ -198,6 +197,7 @@ function pageController()
             break;
 
         case '/edit-user' :
+            //Ensures user is logged in and has permissions before allowing them to update account
             if(isset($_SESSION['LOGGED_IN_USER'])){
                 $mainView = '../views/users/edit.php';
                 $user = new User;
@@ -243,7 +243,7 @@ function pageController()
                 $attempt = $user::attempt(Input::get("email_user"), Input::get("password"));
 
                 if($user::check()){
-                    header("Location: http://adlister.dev");
+                    header("Location: /");
                     die();
                 }
             }
@@ -266,7 +266,7 @@ function pageController()
         case '/logout' :
             $user = new User;
             $user::logout();
-            header("Location: http://adlister.dev/");
+            header("Location: /");
             break;
 
         default:    // displays 404 if route not specified above
@@ -278,7 +278,7 @@ function pageController()
 
     //Search Bar Functionality
     if(Input::has("search")){
-        header("Location: http://adlister.dev/items?a=" . Input::get('search'));
+        header("Location: /items?a=" . Input::get('search'));
         die();
     }
 
